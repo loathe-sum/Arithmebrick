@@ -94,12 +94,17 @@ function _update()
  -- play sfx 1 at y edge
  sfx(1)
  end
+ -- default pad color
  pad_clr=7
+ -- if ball hits, change color of pad
 if ball_hit_box(pad_x,pad_y,pad_w,pad_h,pad_clr) then
     pad_clr=8
+    ball_ys= -ball_ys
 end
+-- if sprite hits, change color of pad
 if ball_spr_hit_box(pad_x,pad_y,pad_w,pad_h,pad_clr) then
     pad_clr=12
+    ball_spr_ys= -ball_spr_ys
 end
 
 end
@@ -115,35 +120,49 @@ function _draw()
  pad_x+pad_w,pad_h+pad_y,
  pad_clr
  )
+
  -- tutorial ball
  circfill
  (
  ball_x,ball_y,
  ball_rad,ball_clr
  )
+
  -- main ball sprite
  spr(0,ball_spr_x,ball_spr_y)
 end
+
  -- setup hitbox for the ball
- -- can make another with
- -- spr instead for testing
+
 function ball_hit_box
  --establishes the same 4 points
  --as the pad
- (box_x,box_y,box_w,box_h)
+(box_x,box_y,box_w,box_h)
  --checks the 4 corners of ball
  --hitbox against pad
+
+ --[[makes box by creating 4 points from the center of the ball
+ --imagine a cross from the center point (x,y origin)
+ --and then connecting the 4 points to make a square
+ --thats the rough hitbox]]
+ --checks the 4 corners of ball
+ --hitbox against pad_rect points
  if
+
+
+ --upper point of ball
  (ball_y-ball_rad>box_y+box_h)
  then
  return false
  end
  if
+ --upper lower point of ball
  (ball_y+ball_rad<box_y)
  then
  return false
  end
  if
+ --left point of ball
  (ball_x-ball_rad>box_x+box_w)
  then
  return false
