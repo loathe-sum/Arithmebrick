@@ -5,6 +5,16 @@ __lua__
 --github ID check - workDevice
 --github ID check - GitHubShell
 
+-- test include file
+-- need stable cloud drive
+-- folder for pico-8 and
+-- projects on there
+-- no longer worry about
+-- system to system issues
+
+-- include can suck my ass
+-- in pico pages instead
+
 function _init()
     cls(3)
 end
@@ -209,9 +219,7 @@ function ball_spr_hit_box
     return true
 end
 -->8
--- main variables
-
--- declaration barf
+-- global variables
 
 -- tutorial ball
 
@@ -235,7 +243,7 @@ ball_spr_ys=1   -- y speed
 -- pad rect
 
 pad_x=52
-pad_xs=1
+pad_xs=0
 pad_y=124
 pas_ys=1
 pad_w=24
