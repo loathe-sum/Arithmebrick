@@ -43,7 +43,7 @@ function _update()
  end
 
  if not(but_press) then
-  pad_xs=pad_xs/1.7
+  pad_xs=pad_xs/1.6
  end
 
  -- tutorial ball modifiers
@@ -223,7 +223,7 @@ end
 
 -- tutorial ball
 
-ball_x=rnd(22)
+ball_x=rnd(109)
 ball_xs=1
 ball_y=1
 ball_ys=1
@@ -252,6 +252,19 @@ pad_clr=7
 -->8
 -- test container
 
+--[[ function to do rnd(127) but 
+set min to 19 rather than built in 0.
+max is also built into rnd feature
+and can be set rnd(#)
+function spawn_x_min ()
+    ball_spawn_x=rnd(127)
+    if ball_spawn_x < 20 then
+    ball_spawn_x=20
+    end
+
+
+end
+]]
 --[[ #todo ⬆️/⬇️ button ideas
 
 both used to scroll thru
