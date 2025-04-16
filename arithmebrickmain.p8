@@ -2,18 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 -- arithmebrick
---github ID check - workDevice
---github ID check - GitHubShell
-
--- test include file
--- need stable cloud drive
--- folder for pico-8 and
--- projects on there
--- no longer worry about
--- system to system issues
-
--- include can suck my ass
--- in pico pages instead
+-- dont go down #include rabbit hole
 
 function _init()
     cls(3)
@@ -21,7 +10,7 @@ end
 
 function _update()
 
- -- button controls
+ -- ---button controls---
 
  -- button press check to change speed when released
  but_press=false
@@ -42,6 +31,8 @@ function _update()
  but_press=false
  end
 
+ -- if button not pressed
+ -- then slow down speed
  if not(but_press) then
   pad_xs=pad_xs/1.6
  end
@@ -63,14 +54,14 @@ function _update()
  then ball_clrm= -ball_clrm
  end
 
- -- x/y limits check
+ -- x limit check
  if (ball_x<1) or
  (ball_x>125)  then
  ball_xs= -ball_xs
  -- play sfx 1 at x edge
  sfx(0)
  end
-
+ -- y limit check
  if (ball_y<1) or
  (ball_y>125)  then
  ball_ys= -ball_ys
@@ -85,11 +76,11 @@ function _update()
  ball_radm= -ball_radm
  end
 
- -- assigns ball_spr a speed
+ -- gives ball_spr a speed
  ball_spr_x+=ball_spr_xs
  ball_spr_y+=ball_spr_ys
 
- -- checks x limits, sends back
+ -- checks x limits
  if (ball_spr_x<1) or
  (ball_spr_x>125)  then
  ball_spr_xs= -ball_spr_xs
@@ -97,7 +88,7 @@ function _update()
  sfx(1)
  end
 
- -- checks y limits, sends back
+ -- checks y limits
  if (ball_spr_y<1) or
  (ball_spr_y>125)  then
  -- if min or max reached,
@@ -147,21 +138,11 @@ end
  -- setup hitbox for the ball
 
 function ball_hit_box
- --establishes the same 4 points
- --as the pad
+ --4 hit box coordinates
 (box_x,box_y,box_w,box_h)
- --checks the 4 corners of ball
- --hitbox against pad
-
- --[[makes box by creating 4 points from the center of the ball
- --imagine a cross from the center point (x,y origin)
- --and then connecting the 4 points to make a square
- --thats the rough hitbox]]
- --checks the 4 corners of ball
+ 
  --hitbox against pad_rect points
  if
-
-
  --upper point of ball
  (ball_y-ball_rad>box_y+box_h)
  then
@@ -179,6 +160,7 @@ function ball_hit_box
  then
  return false
  end
+ -- right point of ball
  if (ball_x+ball_rad < box_x)
  then
  return false
