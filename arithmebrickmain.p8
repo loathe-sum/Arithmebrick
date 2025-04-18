@@ -247,30 +247,133 @@ function spawn_x_min ()
 
 end
 ]]
---[[ #todo ⬆️/⬇️ button ideas
 
-both used to scroll thru
-active item options, also
-navigate menus
+-- ray test for bounce calc
 
-if btn(2) then
--- up/⬆️
-end
--- down/⬇️
-if btn(3) then
-end
-]]
 
---[[ 🅾️/❎ button ideas
-🅾️="shoot" ball
-❎=use item
-if btn(4) then
--- 🅾️shoot_ball
+-- copy and pasted test function for ball bounce direction
+-- split into quadrants for each direction of impact
+-- can be multipurpose, like for when ball bounces into bricks instead of pad
+-- it can have high accuracy collision detection
+-- last function the crucial part
+-- has the cases and switches
+
+--start of test
+--[[box_x=32
+box_y=58
+box_w=64
+box_h=12
+box_clr=10
+
+ray_x= 0
+ray_y= 0
+ray_dx= -2
+ray_dy= -2
+
+debug1="swag"
+
+function _init()
+cls()
 end
-if btn(5) then
--- ❎use_item_highlighted
+function _update()
+ if btn(0) then ray_x-=1 end
+ if btn(1) then ray_x+=1 end
+ if btn(2) then ray_y-=1 end
+ if btn(3) then ray_y+=1 end
 end
-]]
+function _draw()
+ cls()
+ rect(box_x,box_y,
+ box_x+box_w,box_y+box_h,box_clr)
+ local
+ test_x,test_y = ray_x,ray_y
+ repeat
+  pset(test_x,test_y,8)
+  test_x+=ray_dx
+  test_y+=ray_dy
+ until test_x<0 or test_x>128
+ or test_y<0 or test_y>128
+ if deflx_hitbox(ray_x,ray_y,
+ ray_dx,ray_dy,box_x,box_y,box_w,box_h) then
+  print ("horizontal")
+ else
+  print("vertical")
+ end
+ print(debug1)
+end
+
+-- function for how to deflect
+-- from hitbox
+function deflx_hitbox
+-- defines arguments
+-- b = ball , t = target
+(bx,by,bdx,bdy,tx,ty,tw,th)
+ --case 1, chk if moving vert 
+ if bdx==0 then return false
+ --case 2, chk if moving horiz
+ elseif bdy==0 then return true
+
+ else
+ -- moving diagonally
+ -- check slope
+ local slope = bdy/bdx
+ -- check coordinate
+ local cx,cy
+ -- check quadrants
+ if slope > 0 and bdx > 0 then
+  -- moving down right *wrong*
+ 	debug1="q1"
+ 	cx = tx-bx
+ 	cy = ty-by
+ 	if cx<=0 then 
+ 	 return false
+ 	elseif cy/cx<slope then 
+ 	 return true
+  else 
+   return false
+  end
+  elseif slope<0 and bdx>0 then
+  debug1="q2"
+  -- moving up right
+  cx = tx-bx
+  cy = ty+th-by
+  if cx<=0 then  
+  return false
+  elseif cy/cx < slope then
+  return false
+  else return true
+  end
+  elseif 
+  slope > 0 and bdx<0 then
+  debug1="q3"
+  -- moving left up
+  cx = tx+tw-bx
+  cy = ty+th-by
+  if cx>=0 then
+  return false
+  elseif cy/cx > slope then
+  return false
+  else
+  return true
+  end
+  else
+  -- moving left down
+  debug1="q4"
+  cx = tx+tw-bx
+  cy = ty-by
+  if cx>=0 then
+  return false
+  elseif cy/cx < slope then
+  return false
+  else
+  return true
+  end
+  end
+ end
+ return false
+end]]
+
+--end of test
 __gfx__
 00eeee00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 0e7777e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
