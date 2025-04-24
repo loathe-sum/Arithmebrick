@@ -130,8 +130,8 @@ end
  
 function draw_start()
  cls()
- print("pico hero breakout",30,40,7)
- print("press ヌ█⬆️ to start",32,80,11)
+ print("lazydevs_breakout",30,40,7)
+ print("press -z- to start",32,80,11)
 end
  
 function draw_gameover()
