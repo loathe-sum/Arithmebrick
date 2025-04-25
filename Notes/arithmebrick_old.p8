@@ -219,7 +219,7 @@ ball_clrm=.1
 ball_spr_x=1    -- x position
 ball_spr_xs=1.5 -- x speed
 ball_spr_y=9    -- y position
-ball_spr_ys=1   -- y speed
+ball_spr_ys=1.5   -- y speed
 --ball_spr_rad=8-- 8x8 spr
 
 -- pad rect
