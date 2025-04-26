@@ -131,7 +131,7 @@ end
  
 function draw_start()
  cls()
- print("lazydevs_breakout",30,40,7)
+ print("arithmebrick_test",30,40,7)
  print("press -z- to start",32,80,11)
 end
  
@@ -139,7 +139,7 @@ function draw_gameover()
  --cls()
  rectfill(0,60,128,75,0)
  print("game over",46,62,7)
- print("press ヌ█⬆️ to restart",27,68,6)
+ print("press -z- to restart",27,68,6)
 end
  
 function draw_game()
@@ -148,7 +148,7 @@ function draw_game()
  rectfill(pad_x,pad_y,pad_x+pad_w,pad_y+pad_h,pad_c)
  
  rectfill(0,0,128,6,0)
- print("lives:"..lives,1,1,7)
+ print("balls:"..lives,1,1,7)
  print("score:"..points,40,1,7)
  
 end
