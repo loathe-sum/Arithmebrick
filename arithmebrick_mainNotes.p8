@@ -4,6 +4,7 @@ __lua__
 function _init()
  cls()
  mode="start"
+ prts={}
 end
  
 function _update60()
@@ -17,6 +18,13 @@ function _update60()
 end
  
 function update_start()
+ if btn(❎) then
+  add(prts,{x=32+rnd(30),y=63})
+  end
+  for fuck in all(prts) do
+  fuck.x+=1+rnd(3)
+  fuck.y+=1+rnd(3)
+  end
  if btn(4) then
   startgame()
  end
@@ -28,7 +36,7 @@ function startgame()
  ball_r=2
  ball_dr=0.5
  
- pad_x=52
+ pad_x=51
  pad_y=120
  pad_dx=0
  pad_w=24
@@ -82,7 +90,7 @@ function update_game()
   --pad_x+=5 
  end
  if not(buttpress) then
-  pad_dx=pad_dx/1.3
+  pad_dx=pad_dx/1.8
  end
  pad_x+=pad_dx
  
@@ -136,11 +144,17 @@ function _draw()
   draw_gameover()
  end
 end
+
+
  
 function draw_start()
  cls()
+ for fuck in all(prts) do
+  circfill(fuck.x+rnd(3),fuck.y+rnd(5),1,14)
+  
+ end
  print("arithmebrick_test",30,40,7)
- print("press -z- to start",32,80,11)
+ print("press -z- to start",28,80,11)
 end
  
 function draw_gameover()
@@ -152,6 +166,10 @@ end
  
 function draw_game()
  cls(1)
+ -- center line for ref
+ rectfill(63,0,63,127,14)
+ -- center line for ref
+ rectfill(0,63,127,63,14)
  circfill(ball_x,ball_y,ball_r, 10)
  rectfill(pad_x,pad_y,pad_x+pad_w,pad_y+pad_h,pad_c)
  
@@ -160,6 +178,7 @@ function draw_game()
  print("score:"..points,40,1,7)
  
 end
+
  
 function ball_box(bx,by,box_x,box_y,box_w,box_h)
  -- checks for a collion of the ball with a rectangle
@@ -237,6 +256,7 @@ function deflx_ball_box(bx,by,bdx,bdy,tx,ty,tw,th)
  end
  return false
 end
+
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
