@@ -10,6 +10,7 @@ function _init()
  strt_txt_clr=7
  strt_txt_flsh=1
  flsh_mod=.2
+ ball_clr=7
 end
  
 function _update60()
@@ -27,6 +28,7 @@ function update_start()
   add(prts,{x=5+rnd(90),y=10})
   strt_txt_clr+=strt_txt_flsh
   
+  
   --[[ -failed flash-
   if strt_txt_clr>15
   then
@@ -37,6 +39,9 @@ function update_start()
  strt_txt_flsh = strt_txt_flsh
  end
  ]]
+ end
+ if strt_txt_clr==0
+ then strt_txt_clr=14
  end
  
   for fuck in all(prts) do
@@ -53,14 +58,15 @@ function update_start()
   end
   
   if btn(➡️) then
-  add(ryt_prts,{x=79+rnd(15),y=61})
+  add(ryt_prts,{x=79,y=61})
   end
   for right in all(ryt_prts) do
-  right.x-=rnd(3)
-  right.y+=rnd(3)
+  right.x-=rnd(2)
+  right.y+=rnd(1)
   end
  if btn(4) then
   startgame()
+  sfx(4)
  end
 end
  
@@ -152,8 +158,8 @@ function update_game()
   end
   sfx(1)
   points+=1
- end
- 
+  end
+  
  ball_x=nextx
  ball_y=nexty
  
@@ -162,6 +168,7 @@ function update_game()
   lives-=1
   if lives<0 then
    gameover()
+   sfx(3)
   else
    serveball()
   end
@@ -182,17 +189,16 @@ end
 
  
 function draw_start()
- cls()
- 
+ cls() 
  prts_clr=10
  for fuck in all(prts) do
   circfill(fuck.x+rnd(3),fuck.y+rnd(5),1,prts_clr+(-16+rnd(31)))
  end
  for left in all(lft_prts) do
-  circfill(left.x+rnd(3),left.y+rnd(10),1,prts_clr+rnd(8))
+  circfill(left.x+rnd(3),left.y+rnd(10),1,prts_clr+rnd(5))
  end
  for right in all(ryt_prts) do
-  circfill(right.x-rnd(3),right.y+rnd(5),1,prts_clr+rnd(5))
+  circfill(right.x-rnd(3),right.y+rnd(10),1,prts_clr+rnd(4))
  end
  print("arithmebrick_test",30,40,strt_txt_clr)
  print("press -z- to start",28,80,11)
@@ -211,7 +217,7 @@ function draw_game()
  rectfill(63,0,63,127,14)
  -- center line for ref
  rectfill(0,63,127,63,14)
- circfill(ball_x,ball_y,ball_r, 10)
+ circfill(ball_x,ball_y,ball_r, ball_clr)
  rectfill(pad_x,pad_y,pad_x+pad_w,pad_y+pad_h,pad_c)
  
  rectfill(0,0,128,6,0)
@@ -309,3 +315,5 @@ __sfx__
 00010000123501235011340113401134011320113101131011320113003140035400374003a4003e4003f4000000000000000003f4003f4003e4003e4003c4003c4003b4003a4003940038400374000000000000
 00010000163501635016350193501a340193301832019320193000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 0001000021350203502725027250221501b05016350133500f3500c3500a350073500435002350003500035000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000600001c3501d450273502a4502e350274502e3501c45015450173500a350064400d330034300a330114300d130033200212000110000000000000000000000000000000000000000000000000000000000000
+00040000165501455029550210502705028050225500b55026050095500c0502e550375101d5501c5503e550305002d500125000e5000e500175001b5001b5001850014500155001750012500195000e50000520
