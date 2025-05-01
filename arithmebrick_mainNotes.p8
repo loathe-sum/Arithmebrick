@@ -5,6 +5,11 @@ function _init()
  cls()
  mode="start"
  prts={}
+ lft_prts={}
+ ryt_prts={}
+ strt_txt_clr=7
+ strt_txt_flsh=1
+ flsh_mod=.2
 end
  
 function _update60()
@@ -19,11 +24,40 @@ end
  
 function update_start()
  if btn(❎) then
-  add(prts,{x=32+rnd(30),y=63})
+  add(prts,{x=5+rnd(90),y=10})
+  strt_txt_clr+=strt_txt_flsh
+  
+  --[[ -failed flash-
+  if strt_txt_clr>15
+  then
+  strt_txt_flsh= -strt_txt_flsh/flsh_mod
   end
+ if strt_txt_clr<2
+ then
+ strt_txt_flsh = strt_txt_flsh
+ end
+ ]]
+ end
+ 
   for fuck in all(prts) do
   fuck.x+=1+rnd(3)
-  fuck.y+=1+rnd(3)
+  fuck.y+=1+rnd(10)
+  end
+  
+ if btn(⬅️) then
+  add(lft_prts,{x=47,y=63})
+ end
+  for left in all(lft_prts) do
+  left.x+=1+rnd(2)
+  left.y+=rnd(1)
+  end
+  
+  if btn(➡️) then
+  add(ryt_prts,{x=79+rnd(15),y=61})
+  end
+  for right in all(ryt_prts) do
+  right.x-=rnd(3)
+  right.y+=rnd(3)
   end
  if btn(4) then
   startgame()
@@ -149,11 +183,18 @@ end
  
 function draw_start()
  cls()
+ 
+ prts_clr=10
  for fuck in all(prts) do
-  circfill(fuck.x+rnd(3),fuck.y+rnd(5),1,14)
-  
+  circfill(fuck.x+rnd(3),fuck.y+rnd(5),1,prts_clr+(-16+rnd(31)))
  end
- print("arithmebrick_test",30,40,7)
+ for left in all(lft_prts) do
+  circfill(left.x+rnd(3),left.y+rnd(10),1,prts_clr+rnd(8))
+ end
+ for right in all(ryt_prts) do
+  circfill(right.x-rnd(3),right.y+rnd(5),1,prts_clr+rnd(5))
+ end
+ print("arithmebrick_test",30,40,strt_txt_clr)
  print("press -z- to start",28,80,11)
 end
  
