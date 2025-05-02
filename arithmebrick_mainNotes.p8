@@ -18,6 +18,7 @@ function _init()
 end
  
 function _update60()
+-- 60fps checks game state
  if mode=="game" then
   update_game()
  elseif mode=="start" then
@@ -35,14 +36,8 @@ function update_start()
  then
  z_text_flsh = -z_text_flsh
  end
- --[[
- placeholder
- z_txt_clr+=z_txt_flash
- if clr < 2 or clr > 15
- then flsh = -flsh
- flash rate / something to slow
- down flash rate
- ]]
+ 
+ -- press x for vfx
  if btn(❎) then
   add(prts,{x=5+rnd(90),y=10})
   strt_txt_clr+=strt_txt_flsh
@@ -56,7 +51,8 @@ function update_start()
   fuck.x+=1+rnd(3)
   fuck.y+=1+rnd(10)
   end
-  
+ 
+ -- press left for vfx 
  if btn(⬅️) then
   add(lft_prts,{x=47,y=63})
  end
@@ -64,7 +60,7 @@ function update_start()
   left.x+=1+rnd(2)
   left.y+=rnd(1)
   end
-  
+ -- press right for vfx 
   if btn(➡️) then
   add(ryt_prts,{x=79,y=61})
   end
@@ -72,6 +68,8 @@ function update_start()
   right.x-=rnd(2)
   right.y+=rnd(1)
   end
+  
+ -- press z to start
  if btn(4) then
   startgame()
   sfx(4)
@@ -125,31 +123,38 @@ function update_game()
  local buttpress=false
  local nextx,nexty
  
+ -- pad movement left
  if btn(0) then
   --left
   pad_dx=-2.5
   buttpress=true
   --pad_x-=5
  end
+ -- pad movement right
  if btn(1) then
   --right
   pad_dx=2.5
   buttpress=true
   --pad_x+=5 
  end
+ -- smooth/slow when released
  if not(buttpress) then
   pad_dx=pad_dx/1.8
  end
+ -- pad location and smooth
  pad_x+=pad_dx
- 
+ -- creates next ball position
+ -- adding current to delta
  nextx=ball_x+ball_dx
  nexty=ball_y+ball_dy
  
+ -- bounce ball off sides
  if nextx > 124 or nextx < 3 then
   nextx=mid(0,nextx,127)  
   ball_dx = -ball_dx
   sfx(0)
  end
+ -- bounce ball back from top
  if nexty < 10 then
   nexty=mid(0,nexty,127) 
   ball_dy = -ball_dy
@@ -185,6 +190,7 @@ end
  
  
 function _draw()
+-- 60fps check on what to draw
  if mode=="game" then
   draw_game()
  elseif mode=="start" then
