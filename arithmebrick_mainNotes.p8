@@ -123,6 +123,7 @@ function update_game()
  local buttpress=false
  local nextx,nexty
  
+ 
  -- pad movement left
  if btn(0) then
   --left
@@ -154,6 +155,14 @@ function update_game()
   ball_dx = -ball_dx
   sfx(0)
  end
+ 
+ -- if ball above 95  px
+ -- then bring back to white
+ if nexty < 95
+  then
+  ball_clr=7
+  end
+
  -- bounce ball back from top
  if nexty < 10 then
   nexty=mid(0,nexty,127) 
@@ -169,12 +178,20 @@ function update_game()
   else
    ball_dy = -ball_dy
   end
+  -- things that trigger after pad deflect
+  ball_clr=11
+  -- trigger particle fx
   sfx(1)
   points+=1
   end
   
+  
+  
+  
  ball_x=nextx
  ball_y=nexty
+ 
+ 
  
  if nexty > 127 then
   sfx(2)
